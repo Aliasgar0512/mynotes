@@ -1,3 +1,6 @@
+
+import 'dart:developer' as devtools;
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +22,13 @@ class HomePage extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             final user = FirebaseAuth.instance.currentUser;
-            debugPrint(user.toString());
+            devtools.log(user.toString());
             if (user != null) {
               if (!user.emailVerified) {
-                debugPrint('User is Verified');
+                devtools.log('User is Verified');
                 return const NotesView();
               } else {
-                debugPrint('User need to Verify email first');
+                devtools.log('User need to Verify email first');
                 return const VerifyEmailView();
               }
             } else {

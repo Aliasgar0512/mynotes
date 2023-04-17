@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_notes_app/firebase_options.dart';
+import 'dart:developer' as devtools;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -63,19 +66,25 @@ class _LoginViewState extends State<LoginView> {
                   email: email,
                   password: password,
                 );
-                debugPrint(userCredential.toString());
+                devtools.log(userCredential.toString());
                 // userCredential.user!=null
+                if (context.mounted) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/notes/',
+                    (_) => false,
+                  );
+                }
               } on FirebaseAuthException catch (e) {
-                debugPrint(e.runtimeType.toString());
-                debugPrint(e.code);
+                devtools.log(e.runtimeType.toString());
+                devtools.log(e.code);
                 if (e.code == 'user-not-found') {
-                  debugPrint('User Not Found');
+                  devtools.log('User Not Found');
                 } else if (e.code == 'wrong-password') {
-                  debugPrint('Wrong Password');
+                  devtools.log('Wrong Password');
                 }
               } catch (e) {
-                debugPrint(e.runtimeType.toString());
-                debugPrint(e.toString());
+                devtools.log(e.runtimeType.toString());
+                devtools.log(e.toString());
               }
             },
             child: const Text('Login'),
@@ -83,7 +92,10 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/register/', (route) => false);
+                context,
+                '/register/',
+                (route) => false,
+              );
             },
             child: const Text('Not register yet? Register here!'),
           )
