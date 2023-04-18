@@ -3,6 +3,7 @@ import 'dart:developer' as devtools /** alias for package */
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_notes_app/constants/routes.dart';
 import 'package:flutter_notes_app/views/menu_action.dart';
 
 class NotesView extends StatefulWidget {
@@ -36,7 +37,7 @@ class _NotesViewState extends State<NotesView> {
                     await FirebaseAuth.instance.signOut();
                     if (context.mounted) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/login/',
+                        loginRoute,
                         (_) => false,
                       );
                     }
