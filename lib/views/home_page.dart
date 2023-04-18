@@ -1,4 +1,3 @@
-
 import 'dart:developer' as devtools;
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +23,7 @@ class HomePage extends StatelessWidget {
             final user = FirebaseAuth.instance.currentUser;
             devtools.log(user.toString());
             if (user != null) {
-              if (!user.emailVerified) {
+              if (user.emailVerified) {
                 devtools.log('User is Verified');
                 return const NotesView();
               } else {

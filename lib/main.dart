@@ -4,6 +4,7 @@ import 'package:flutter_notes_app/views/home_page.dart';
 import 'package:flutter_notes_app/views/login_view.dart';
 import 'package:flutter_notes_app/views/notes_view.dart';
 import 'package:flutter_notes_app/views/register_view.dart';
+import 'package:flutter_notes_app/views/verify_email_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,8 @@ void main() {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
         notesRoute: (context) => const NotesView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
+
       },
     ),
   );
