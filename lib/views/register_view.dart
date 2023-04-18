@@ -1,10 +1,9 @@
-import 'dart:developer';
+import 'dart:developer' as devtools;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools;
-
 import 'package:flutter_notes_app/constants/routes.dart';
+import 'package:flutter_notes_app/utilities/show_error_dialog.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -54,11 +53,11 @@ class _RegisterViewState extends State<RegisterView> {
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
             /*
-                        TODO InputDecoration 
-                       * 
-                       * - we use [InputDecoration] for [TextField] decoration
-                       *  
-                       */
+             TODO InputDecoration 
+            * 
+            * - we use [InputDecoration] for [TextField] decoration
+            *  
+            */
             decoration:
                 const InputDecoration(hintText: 'Enter your email here'),
           ),
@@ -84,17 +83,16 @@ class _RegisterViewState extends State<RegisterView> {
                 devtools.log(userCredential.toString());
               } on FirebaseAuthException catch (e) {
                 devtools.log(e.code);
-                devtools.log(e.toString());
 
                 if (e.code == 'weak-password') {
-                  devtools.log('Password is too weak');
+                  showErrorDialog(context, 'Password is too weak');
                 } else if (e.code == 'email-already-in-use') {
-                  devtools.log('Email is already registered');
+                  showErrorDialog(context, 'Email is already registered');
                 } else if (e.code == 'invalid-email') {
-                  devtools.log('Invalid Email Id');
+                  showErrorDialog(context, 'Invalid Email Id');
                 }
               } catch (e) {
-                devtools.log(e.toString());
+                showErrorDialog(context, e.toString());
               }
             },
             child: const Text('Register'),
@@ -103,7 +101,7 @@ class _RegisterViewState extends State<RegisterView> {
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-               loginRoute,
+                loginRoute,
                 (route) => false,
               );
             },
