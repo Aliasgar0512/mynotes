@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_notes_app/firebase_options.dart';
+import 'package:flutter_notes_app/services/auth/auth_exceptions.dart';
 import 'package:flutter_notes_app/services/auth/auth_provider.dart';
 import 'package:flutter_notes_app/services/auth/auth_user.dart';
-import 'package:flutter_notes_app/services/auth/auth_exceptions.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthProvider extends AuthProvider {
   @override
@@ -93,5 +94,12 @@ class FirebaseAuthProvider extends AuthProvider {
     } else {
       throw UserNotLoggedInAuthException();
     }
+  }
+
+  @override
+  Future<void> initialize() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   }
 }
