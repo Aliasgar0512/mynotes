@@ -96,6 +96,8 @@ class _RegisterViewState extends State<RegisterView> {
                   await showErrorDialog(context, 'Email is already registered');
                 } else if (e.code == 'invalid-email') {
                   await showErrorDialog(context, 'Invalid Email Id');
+                } else {
+                  await showErrorDialog(context, e.code);
                 }
               } catch (e) {
                 await showErrorDialog(context, e.toString());

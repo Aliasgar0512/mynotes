@@ -15,9 +15,6 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Verify Email'),
-        actions: [
-          
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
